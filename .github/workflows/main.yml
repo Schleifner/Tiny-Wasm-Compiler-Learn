@@ -1,0 +1,25 @@
+name: CMake
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  cspell:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '18'
+
+    - name: Install cspell
+      run: npm install -g cspell
+
+    - name: Run cspell
+      run: cspell "**/*.md"
