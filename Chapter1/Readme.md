@@ -8,11 +8,11 @@ In this chapter, the first Wasm module will be compiled.
 2. Parser the wasm module byte by byte.
 3. Compile the opcode of the function `foo` to machine code
 4. According to the input and assert in the wast, test the generated code with [gtest](https://github.com/google/googletest). Attention: gtest need to be cross compiled for arm64
-5. Setup a [github action](https://docs.github.com/en/actions) to ensure code quality
-   5.1 trigger on PR
-   5.2 check clang-format
-   5.3 build by cmake with clang-tidy enabled. Example of cmake code `set(CMAKE_CXX_CLANG_TIDY clang-tidy --config-file ${CMAKE_CURRENT_LIST_DIR}/.clang-tidy "--header-filter=${CMAKE_CURRENT_LIST_DIR}/(src|tests)/.*")`
-   5.4 run test base on the wast
+5. Setup a [github action](https://docs.github.com/en/actions) to ensure code quality<br/>
+   5.1 trigger on PR<br/>
+   5.2 check clang-format<br/>
+   5.3 build by cmake with clang-tidy enabled. Example of cmake code `set(CMAKE_CXX_CLANG_TIDY clang-tidy --config-file ${CMAKE_CURRENT_LIST_DIR}/.clang-tidy "--header-filter=${CMAKE_CURRENT_LIST_DIR}/(src|tests)/.*")`<br/>
+   5.4 run test base on the wast<br/>
 
 ## Docs
 
