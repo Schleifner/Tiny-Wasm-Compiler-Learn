@@ -11,9 +11,9 @@ Then learn about what is [wat](https://developer.mozilla.org/en-US/docs/WebAssem
 
 ## Tasks to do
 
-1. Implement following Wasm functions with wat. [Doc](https://developer.mozilla.org/en-US/docs/WebAssembly/Text_format_to_Wasm)
-   1.1 calculate sum of 1 to n, n is i32 type
-   1.2 Fibonacci sequence
+1. Implement following Wasm functions with wat. [Doc](https://developer.mozilla.org/en-US/docs/WebAssembly/Text_format_to_Wasm)<br/>
+   1.1 calculate sum of 1 to n, n is i32 type<br/>
+   1.2 Fibonacci sequence<br/>
 2. Run the functions with nodejs. [Doc](https://nodejs.org/en/learn/getting-started/nodejs-with-webassembly)
 
 ## Learn target
