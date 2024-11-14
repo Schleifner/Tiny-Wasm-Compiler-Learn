@@ -15,11 +15,11 @@ Develop a tiny **Wasm 1.0** JIT compiler for **arm64** with cmake and **C++ 14**
 2. Export function call
 3. Local variables
 4. Arithmetic operation
-5. Linear memory
-6. Global memory
-7. Control flow instructions
-8. Direct function call
-9. Indirect function call
+5. Control flow instructions
+6. Direct function call
+7. Indirect function call
+8. Global variable
+9. Linear memory
 10. Import function call
 
 Out of scope:
