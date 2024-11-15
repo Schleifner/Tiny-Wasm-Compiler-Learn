@@ -1,24 +1,23 @@
 # Introduction
 
-This chapter will add indirect function call. It's the foundation of virtual function and function pointer.
+This chapter will add function call
 
 ## Task to do
 
-1. Implement call_indirect instruction
-2. Check function signature for call_indirect. Extend the trap mechanism also for call_indirect beside `div`
-3. Design memory layout for Wasm `table`
-4. Design how to let JIT code get address of table
-5. Implement `table` and `elem` of Wasm
-6. Pass [all test cases](./test)
-7. Add test into CI pipeline
+1. Design calling convention
+2. Implement `type` section of Wasm.
+3. Implement call instruction
+4. Pass [all test cases](./test)
+5. Add test into CI pipeline
 
 ## Doc
 
-1. Extended read about performance overhead of indirect call compare with direct call regarding [CPU pipeline](https://web.eecs.utk.edu/~mbeck/classes/cs160/lectures/09_intruc_pipelining.pdf).
+1. [Procedure Call Standard for the Arm 64-bit Architecture](https://github.com/ARM-software/abi-aa/blob/a82eef0433556b30539c0d4463768d9feb8cfd0b/aapcs64/aapcs64.rst)
+2. [Symbol table](https://medium.com/ax1al/a-brief-info-on-linker-loader-symbol-symbol-tables-2fed729eb490) is widely used for link call address.
 
 ## Learn target
 
-1. Understand call_indirect instruction of Wasm
-2. Understand table of Wasm
-3. Understand indirect function call of arm64
-4. Understand context, volatile/non-volatile registers and calling convention
+1. Understand call instruction of Wasm
+2. Understand bl instruction and link register of arm64
+3. Understand context, volatile/non-volatile registers and calling convention
+4. Understand how to link dist address of call instructions

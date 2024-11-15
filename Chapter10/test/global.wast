@@ -1,0 +1,52 @@
+(module
+  (global $a i32 (i32.const -2))
+  (global $b i64 (i64.const -5))
+
+  (global $x (mut i32) (i32.const -12))
+  (global $y (mut i64) (i64.const -15))
+
+  (func (export "get-a") (result i32) (global.get $a))
+  (func (export "get-b") (result i64) (global.get $b))
+  (func (export "get-x") (result i32) (global.get $x))
+  (func (export "get-y") (result i64) (global.get $y))
+  (func (export "set-x") (param i32) (global.set $x (local.get 0)))
+  (func (export "set-y") (param i64) (global.set $y (local.get 0)))
+
+  (func (export "as-if-then") (result i32)
+    (if (result i32) (i32.const 1)
+      (then (global.get $x)) (else (i32.const 2))
+    )
+  )
+  (func (export "as-if-else") (result i32)
+    (if (result i32) (i32.const 0)
+      (then (i32.const 2)) (else (global.get $x))
+    )
+  )
+
+  (func (export "as-br_if-first") (result i32)
+    (block (result i32)
+      (br_if 0 (global.get $x) (i32.const 2))
+      (return (i32.const 3))
+    )
+  )
+  (func (export "as-br_if-last") (result i32)
+    (block (result i32)
+      (br_if 0 (i32.const 2) (global.get $x))
+      (return (i32.const 3))
+    )
+  )
+)
+
+(assert_return (invoke "get-a") (i32.const -2))
+(assert_return (invoke "get-b") (i64.const -5))
+(assert_return (invoke "get-x") (i32.const -12))
+(assert_return (invoke "get-y") (i64.const -15))
+
+(assert_return (invoke "set-x" (i32.const 6)))
+(assert_return (invoke "set-y" (i64.const 7)))
+
+(assert_return (invoke "as-if-then") (i32.const 6))
+(assert_return (invoke "as-if-else") (i32.const 6))
+
+(assert_return (invoke "as-br_if-first") (i32.const 6))
+(assert_return (invoke "as-br_if-last") (i32.const 2))

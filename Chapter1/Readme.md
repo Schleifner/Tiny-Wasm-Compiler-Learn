@@ -7,9 +7,9 @@ In this chapter, the first Wasm module will be compiled.
 1. Parser the wasm module byte by byte. Note: integers are encoded in [LEB128](https://en.wikipedia.org/wiki/LEB128)
 2. Compile the opcode of the function `foo` to machine code
 3. Setup a [github action](https://docs.github.com/en/actions) to ensure code quality<br/>
-   5.1 trigger on PR<br/>
-   5.2 check clang-format<br/>
-   5.3 build by cmake with clang-tidy enabled. Example of cmake code `set(CMAKE_CXX_CLANG_TIDY clang-tidy --config-file ${CMAKE_CURRENT_LIST_DIR}/.clang-tidy "--header-filter=${CMAKE_CURRENT_LIST_DIR}/(src|tests)/.*")`<br/>
+   3.1 trigger on PR<br/>
+   3.2 check clang-format<br/>
+   3.3 build by cmake with clang-tidy enabled. Example of cmake code `set(CMAKE_CXX_CLANG_TIDY clang-tidy --config-file ${CMAKE_CURRENT_LIST_DIR}/.clang-tidy "--header-filter=${CMAKE_CURRENT_LIST_DIR}/(src|tests)/.*")`<br/>
 
 ## Docs
 
