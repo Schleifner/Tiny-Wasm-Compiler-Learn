@@ -2,7 +2,11 @@
 
 ### Video course
 
+EN:
 https://www.youtube.com/watch?v=9p_s457RSQE
+
+CN:
+https://www.bilibili.com/video/BV1dL4y1H7T8/?vd_source=1faa2337c62a6a9c375bf3b315311e72
 
 ## Computer Organization and Architecture
 

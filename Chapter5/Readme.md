@@ -12,7 +12,7 @@ This chapter will add if-else instruction. Then conditional execution is support
 
 ## Doc
 
-This chapter can start with a classic example: calculate abs
+1. This chapter can start with a classic example: calculate abs
 
 ```wat
 (module
@@ -37,6 +37,8 @@ This chapter can start with a classic example: calculate abs
   (export "abs" (func $abs))
 )
 ```
+
+2. In this chapter [address backpatching](https://www.geeksforgeeks.org/backpatching-in-compiler-design/) can be used
 
 ## Learn target
 
