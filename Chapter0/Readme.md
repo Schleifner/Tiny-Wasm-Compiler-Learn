@@ -29,9 +29,9 @@ Arm64, also called aarch64, is an instruction set. For developers don't know thi
 
 ## Tasks to do
 
-1. Implement following Wasm functions with arm64 asm.[Doc](https://book.hacktricks.xyz/macos-hardening/macos-security-and-privilege-escalation/macos-apps-inspecting-debugging-and-fuzzing/arm64-basic-assembly)
-   1.1 calculate sum of 1 to n, n is i32 type
-   1.2 Fibonacci sequence
+1. Implement following Wasm functions with arm64 asm.[Doc](https://book.hacktricks.xyz/macos-hardening/macos-security-and-privilege-escalation/macos-apps-inspecting-debugging-and-fuzzing/arm64-basic-assembly)<br/>
+   1.1 calculate sum of 1 to n, n is i32 type<br/>
+   1.2 Fibonacci sequence<br/>
 2. Compile the asm with arm64 gcc.[Doc](https://azeria-labs.com/arm-on-x86-qemu-user/)
 3. Call the asm functions from C. [Doc](https://learn.microsoft.com/en-us/cpp/build/arm64-windows-abi-conventions?view=msvc-170)
 4. Run the code with qemu user mode emulator

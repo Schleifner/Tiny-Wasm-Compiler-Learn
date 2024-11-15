@@ -6,10 +6,10 @@ Moreover, in real engineering projects, Wasm is usually compiled from frontend p
 
 ## Task to do
 
-1. Support import function
-   1.1 Support import section of Wasm
-   1.2 Design how to link Wasm call with C function.
-   1.3 Call native function with C ABI
+1. Support import function<br/>
+   1.1 Support import section of Wasm<br/>
+   1.2 Design how to link Wasm call with C function.<br/>
+   1.3 Call native function with C ABI<br/>
 
 2. Compile the [test/myPrint.c](./test/myPrint.c) to Wasm which [Wasi-SDK](https://github.com/WebAssembly/wasi-sdk). Example Compile command `/opt/wasi-sdk/bin/clang -fdata-sections -ffunction-sections -mcpu=mvp -mmutable-globals -Wl,--allow-undefined,--export-table,--gc-sections,--no-entry,--export=_start -lstdc++ -z stack-size=8192 -nostartfiles -o build/main.wasm main.c`
 3. Run the `_start` function of the Wasm, and output the print message both to console and a log file
@@ -19,6 +19,7 @@ Moreover, in real engineering projects, Wasm is usually compiled from frontend p
 ## Doc
 
 1. [WebAssembly with different languages](https://enarx.dev/docs/WebAssembly/Introduction)
+2. [Pay attention to stack alignment when calling C API](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/using-the-stack-in-aarch32-and-aarch64)
 
 ## Learn target
 
