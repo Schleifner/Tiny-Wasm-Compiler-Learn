@@ -3,7 +3,9 @@ backpatching
 fdata
 ffunction
 gdbserver
+godbolt
 gtest
+longjmp
 lstdc
 mcpu
 mmap
@@ -13,6 +15,7 @@ multiarch
 nostartfiles
 objdump
 Posix
+setjmp
 typedefs
 wabt
 Walloca
