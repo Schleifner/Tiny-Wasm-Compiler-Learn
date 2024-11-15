@@ -1,9 +1,16 @@
 aarch
 backpatching
+fdata
+ffunction
 gdbserver
 gtest
+lstdc
+mcpu
 mmap
+mmutable
 mprotect
 multiarch
+nostartfiles
 Posix
 wabt
+wasi
