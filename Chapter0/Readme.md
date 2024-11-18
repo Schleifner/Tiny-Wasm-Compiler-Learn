@@ -1,6 +1,6 @@
 # Introduction
 
-This Chapter provide beginner guide about Wasm and Arm64
+This Chapter provide beginner guide about Wasm and Arm64.
 
 ## Getting Start with WebAssembly
 
@@ -34,8 +34,8 @@ Arm64, also called aarch64, is an instruction set. For developers don't know thi
    1.2 Fibonacci sequence<br/>
 2. Compile the asm with arm64 gcc.[Doc](https://azeria-labs.com/arm-on-x86-qemu-user/)
 3. Call the asm functions from C. [Doc](https://learn.microsoft.com/en-us/cpp/build/arm64-windows-abi-conventions?view=msvc-170)
-4. Run the code with qemu user mode emulator
-5. Setup gdb debugger and vscode launch.json to debug the program running in qemu [Doc](https://code.visualstudio.com/docs/cpp/launch-json-reference)
+4. Run the code with qemu user mode emulator.
+5. Setup gdb debugger and vscode launch.json to debug the program running in qemu. [Doc](https://code.visualstudio.com/docs/cpp/launch-json-reference)<br/>
    demo launch.json.
 
 ```json
@@ -59,7 +59,7 @@ Arm64, also called aarch64, is an instruction set. For developers don't know thi
 
 ## Learn target
 
-After this section, the following knowledge needs to be acquired
+After this section, the following knowledge needs to be acquired.
 
 1. Registers of arm64
 2. Basic instructions of arm64

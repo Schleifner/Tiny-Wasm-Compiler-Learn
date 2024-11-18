@@ -1,14 +1,14 @@
 # Introduction
 
-This chapter will add if-else instruction. Then conditional execution is supported by this compiler
+This chapter will add if-else instruction. Then conditional execution is supported by this compiler.
 
 ## Task to do
 
-1. Support if/else instructions
-2. Support compare instruction
-3. Support nop instruction
-4. Pass [all test cases](./test)
-5. Add test into CI pipeline
+1. Support if/else instructions.
+2. Support compare instruction.
+3. Support nop instruction.
+4. Pass [all test cases](./test).
+5. Add test into CI pipeline.
 
 ## Doc
 
@@ -38,9 +38,9 @@ This chapter will add if-else instruction. Then conditional execution is support
 )
 ```
 
-2. In this chapter [address backpatching](https://www.geeksforgeeks.org/backpatching-in-compiler-design/) can be used
+2. In this chapter [address backpatching](https://www.geeksforgeeks.org/backpatching-in-compiler-design/) can be used.
 
 ## Learn target
 
-1. Understand if/else instruction of Wasm
-2. Understand conditional jump instruction in arm64
+1. Understand if/else instruction of Wasm.
+2. Understand conditional jump instruction in arm64.

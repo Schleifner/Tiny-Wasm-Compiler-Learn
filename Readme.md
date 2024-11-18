@@ -1,11 +1,11 @@
 # What's this repository
 
 This repository contains training materials and learning path about developing a WebAssembly JIT compiler for a beginner.
-But this repository doesn't contain any compiler implementation
+But this repository doesn't contain any compiler implementation.
 
 ## Who is the reader of this repository
 
-Beginner developers who are interested at WebAssembly and compiler and want to start working this domain.
+Beginner developers who are interested at WebAssembly & compiler and want to start working this domain.
 
 ## Learning target of this repository
 

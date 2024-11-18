@@ -4,10 +4,10 @@ Block + br + br_if is any way to implement conditional execution.
 
 ## Task to do
 
-1. Support block/br/br_if instructions
-2. Support drop instruction
-3. Pass [all test cases](./test)
-4. Add test into CI pipeline
+1. Support block/br/br_if instructions.
+2. Support drop instruction.
+3. Pass [all test cases](./test).
+4. Add test into CI pipeline.
 
 ## Doc
 
@@ -38,5 +38,5 @@ This is block version abs, compare this with the if-else version
 
 ## Learn target
 
-1. Understand block/br/br_if of Wasm and arm64
+1. Understand block/br/br_if of Wasm and arm64.
 2. Think about what's the advantage of br_if compare with if-else?
