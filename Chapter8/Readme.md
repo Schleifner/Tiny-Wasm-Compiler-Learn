@@ -1,12 +1,12 @@
 # Introduction
 
-This chapter will add function call
+This chapter will add function call between Wasm functions.
 
 ## Task to do
 
-1. Design calling convention
+1. Design Wasm-to-Wasm calling convention. Don't need to consider calling imported functions in this chapter.
 2. Implement `type` section of Wasm.
-3. Implement call instruction
+3. Implement call instruction.
 4. Pass [all test cases](./test)
 5. Add test into CI pipeline
 
@@ -17,7 +17,7 @@ This chapter will add function call
 
 ## Learn target
 
-1. Understand call instruction of Wasm
-2. Understand bl instruction and link register of arm64
-3. Understand context, volatile/non-volatile registers and calling convention
-4. Understand how to link dist address of call instructions
+1. Understand call instruction of Wasm.
+2. Understand bl instruction and link register of arm64.
+3. Understand context, volatile/non-volatile registers and calling convention.
+4. Understand how to link dist address of call instructions.
