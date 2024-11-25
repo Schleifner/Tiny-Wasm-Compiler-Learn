@@ -3,6 +3,13 @@
 This repository contains training materials and learning path about developing a WebAssembly JIT compiler for a beginner.
 But this repository doesn't contain any compiler implementation.
 
+For beginners of WebAssembly compilers, the following issues are commonly encountered:
+
+1. The WebAssembly standard is extensive, and reading it line by line can be tedious and obscure.
+2. The knowledge required for compiler development is vast, making it difficult to know where to start.
+
+This repo aims to provide a smooth learning curve for beginners, allowing developers with no compiler experience to gradually learn the basics of WebAssembly compiler development.
+
 ## Who is the reader of this repository
 
 Beginner developers who are interested at WebAssembly & compiler and want to start working this domain.
