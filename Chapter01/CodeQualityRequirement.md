@@ -39,4 +39,4 @@ Setup a [github action](https://docs.github.com/en/actions) to ensure code quali
 1.  trigger on PR.
 2.  check clang-format.
 3.  build by cmake with clang-tidy enabled.
-4.  build with address sanitizer enabled run test.
+4.  build with address sanitizer enabled and run test.
