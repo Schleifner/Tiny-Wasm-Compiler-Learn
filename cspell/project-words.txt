@@ -2,6 +2,7 @@ aarch
 backpatching
 fdata
 ffunction
+fsanitize
 gdbserver
 godbolt
 gtest
