@@ -8,10 +8,7 @@ In this chapter, the first Wasm module will be compiled.
 2. Compile the opcode of the function `foo` to machine code.
 3. Load the machine code to memory region with execute access.
 4. Run the machine code.
-5. Setup a [github action](https://docs.github.com/en/actions) to ensure code quality<br/>
-   5.1 trigger on PR.<br/>
-   5.2 check clang-format.<br/>
-   5.3 build by cmake with clang-tidy enabled. Example of cmake code `set(CMAKE_CXX_CLANG_TIDY clang-tidy --config-file ${CMAKE_CURRENT_LIST_DIR}/.clang-tidy "--header-filter=${CMAKE_CURRENT_LIST_DIR}/(src|tests)/.*")`<br/>
+5. Configure a CI pipeline with [CodeQualityRequirement](./CodeQualityRequirement.md)
 
 ## Docs
 
@@ -28,4 +25,4 @@ In this chapter, the first Wasm module will be compiled.
 1. Parse Wasm byte code
 2. Emit Arm64 machine code
 3. Memory permission on Linux
-4. Ensure code quality with clang-format and clang-tidy in CI pipeline
+4. Ensure code quality with CodeQualityRequirement. Know basic C++ code quality measurements.
