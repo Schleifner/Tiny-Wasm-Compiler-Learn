@@ -67,6 +67,6 @@ In [Learning_Materials](./Learning_Materials) there are some recommended curses
 
 ## What to do Next
 
-For developers without basic knowledge of Wasm and arm64, start with [Chapter 0](./Chapter0/).
+For developers without basic knowledge of Wasm and arm64, start with [Chapter 00](./Chapter00/).
 
-Otherwise, start with [Chapter 1](./Chapter1/), and then implement the compiler chapter by chapter
+Otherwise, start with [Chapter 01](./Chapter01/), and then implement the compiler chapter by chapter
