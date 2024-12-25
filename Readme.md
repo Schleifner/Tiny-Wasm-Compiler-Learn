@@ -5,8 +5,9 @@ But this repository doesn't contain any compiler implementation.
 
 For beginners of WebAssembly compilers, the following issues are commonly encountered:
 
-1. The WebAssembly standard is extensive, and reading it line by line can be tedious and obscure.
-2. The knowledge required for compiler development is vast, making it difficult to know where to start.
+1. I am very interested in compilers, but production-level compilers are too complex and not suitable for beginners to learn.
+2. The WebAssembly standard is extensive, and reading it line by line can be tedious and obscure.
+3. The knowledge required for compiler development is vast, making it difficult to know where to start.
 
 This repo aims to provide a smooth learning curve for beginners, allowing developers with no compiler experience to gradually learn the basics of WebAssembly compiler development.
 
@@ -67,6 +68,6 @@ In [Learning_Materials](./Learning_Materials) there are some recommended curses
 
 ## What to do Next
 
-For developers without basic knowledge of Wasm and arm64, start with [Chapter 0](./Chapter0/).
+For developers without basic knowledge of Wasm and arm64, start with [Chapter 00](./Chapter00/).
 
-Otherwise, start with [Chapter 1](./Chapter1/), and then implement the compiler chapter by chapter
+Otherwise, start with [Chapter 01](./Chapter01/), and then implement the compiler chapter by chapter
