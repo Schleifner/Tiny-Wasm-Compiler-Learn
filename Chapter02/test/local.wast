@@ -25,16 +25,12 @@
   (func (export "type-param-i64") (param i64) (local.set 0 (i64.const 11)))
 
 
-  (func (export "type-mixed") (param i64 f32 f64 i32 i32) (local f32 i64 i64 f64)
+  (func (export "type-mixed") (param i64 i32 i32) (local i64 i64)
     (local.set 0 (i64.const 0))
-    (local.set 1 (f32.const 0))
-    (local.set 2 (f64.const 0))
-    (local.set 3 (i32.const 0))
-    (local.set 4 (i32.const 0))
-    (local.set 5 (f32.const 0))
-    (local.set 6 (i64.const 0))
-    (local.set 7 (i64.const 0))
-    (local.set 8 (f64.const 0))
+    (local.set 1 (i32.const 0))
+    (local.set 2 (i32.const 0))
+    (local.set 3 (i64.const 0))
+    (local.set 4 (i64.const 0))
   )
 )
 
@@ -43,6 +39,7 @@
 
 (assert_return (invoke "type-param-i32" (i32.const 2)))
 (assert_return (invoke "type-param-i64" (i64.const 3)))
+(assert_return (invoke "type-mixed"(i64.const 0)(i32.const 0)(i32.const 0)))
 
 
 (module
@@ -71,7 +68,4 @@
 
 (assert_return (invoke "as-local.set-value"))
 (assert_return (invoke "as-local.tee-value" (i32.const 0)) (i32.const 1))
-
-
-
 
