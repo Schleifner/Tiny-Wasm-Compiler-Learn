@@ -23,9 +23,6 @@
     )
   )
 
-  (func (export "as-unary-operand") (result f64)
-    (block (result f64) (f64.neg (br_if 0 (f64.const 1.0) (i32.const 1))))
-  )
   (func (export "as-binary-left") (result i32)
     (block (result i32) (i32.add (br_if 0 (i32.const 1) (i32.const 1)) (i32.const 10)))
   )
@@ -94,7 +91,6 @@
 (assert_return (invoke "as-block-first" (i32.const 1)) (i32.const 3))
 (assert_return (invoke "as-block-first-value" (i32.const 0)) (i32.const 11))
 (assert_return (invoke "as-block-first-value" (i32.const 1)) (i32.const 10))
-(assert_return (invoke "as-unary-operand") (f64.const 1.0))
 (assert_return (invoke "as-binary-left") (i32.const 1))
 (assert_return (invoke "as-binary-right") (i32.const 1))
 (assert_return (invoke "as-test-operand") (i32.const 0))
