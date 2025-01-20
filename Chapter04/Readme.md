@@ -5,7 +5,7 @@ This chapter will add div instructions. Div is a special instruction because it'
 ## Task to do
 
 1. Support div_s/div_u instructions.
-2. Check if operand is 0 before div.
+2. Check if operand is 0 before div. Check for integer overflow.
 3. Design how to abort JIT code execution at trap.
 4. Extend the interface between Wasm and C++ to return trap code to C++.
 5. Pass [all test cases](./test).
@@ -19,5 +19,9 @@ This chapter will add div instructions. Div is a special instruction because it'
 ## Learn target
 
 1. Understand div instructions of Wasm and arm64.
-2. Trap mechanism of Wasm.
-3. Difference between b and bl instruction, ret and br instruction.
+   
+   Question: Why div instruction differentiates signed and unsigned, while mul instruction doesn't?
+3. Trap mechanism of Wasm and C.
+
+   Question: Why is it not recommended to use longjmp/setjmp for exception handling in C++?
+5. Difference between b and bl instruction, ret and br instruction.
