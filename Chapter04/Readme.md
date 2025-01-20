@@ -14,8 +14,10 @@ This chapter will add div instructions. Div is a special instruction because it'
 ## Doc
 
 1. To implement the "abort JIT code", the concept of C API [`setjmp`](https://github.com/lattera/glibc/blob/master/sysdeps/aarch64/setjmp.S) and [`longjmp`](https://github.com/lattera/glibc/blob/master/sysdeps/aarch64/__longjmp.S) can be referred
+2. A more reader-friendly wasm manual can be found here (https://github.com/sunfishcode/wasm-reference-manual/blob/master/WebAssembly.md), it may offer help if you found the official one hard to understand.
 
 ## Learn target
 
 1. Understand div instructions of Wasm and arm64.
 2. Trap mechanism of Wasm.
+3. Difference between b and bl instruction, ret and br instruction.
