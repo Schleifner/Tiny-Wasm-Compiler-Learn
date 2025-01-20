@@ -56,10 +56,96 @@ Arm64, also called aarch64, is an instruction set. For developers don't know thi
   ]
 }
 ```
+6. [Optional] Compile with clang and debug with lldb. There is a nice extension called [codelldb](https://github.com/vadimcn/codelldb/blob/master/MANUAL.md) to support native lldb debugging on vscode. Shown below is an example for setting up codelldb debugging. It is also possible for codelldb to support reverse debugging, refer to the manual for details.
 
+Launch.json
+
+```json
+{
+   "name": "LLDB Arm64 active",
+   "type": "lldb",
+   "sourceLanguages": [
+       "cpp"
+   ],
+   "request": "custom",
+   "preLaunchTask": "debug active",
+   "targetCreateCommands": [
+       "target create ${fileDirname}/${fileBasenameNoExtension}"
+   ],
+   "processCreateCommands": [
+       "gdb-remote localhost:1234"
+   ],
+   "initCommands": [
+       "process handle SIGTRAP -s false"
+   ]
+}
+```
+
+Tasks.json
+```json
+{
+   "label": "make build active",
+   "command": "make",
+   "args": [
+       "build",
+       "curFile=${fileDirname}/${fileBasenameNoExtension}"
+   ],
+   "type": "process",
+   "problemMatcher": [
+       "$gcc"
+   ]
+},
+{
+   "label": "make qemu-static-active",
+   "command": "make",
+   "args": [
+       "qemu-gdb",
+       "curFile=${fileDirname}/${fileBasenameNoExtension}"
+   ],
+   "type": "process",
+   "isBackground": true,
+   "problemMatcher": [
+       {
+           "pattern": [
+               {
+                   "regexp": ".",
+                   "file": 1,
+                   "location": 2,
+                   "message": 3
+               }
+           ],
+           "background": {
+               "activeOnStart": true,
+               "beginsPattern": ".",
+               "endsPattern": "."
+           }
+       }
+   ]
+},
+{
+   "label": "debug active",
+   "dependsOrder": "sequence",
+   "dependsOn": [
+       "make build active",
+       "make qemu-static-active"
+   ]
+},
+```
+
+Makefile
+```makefile
+.PHONY: build qemu-gdb clean
+build:
+	/usr/bin/clang++ --target=aarch64-linux-gnu -g ${curFile}.cpp -o ${curFile}
+qemu-gdb: 
+	qemu-aarch64 -g 1234 -L /usr/aarch64-linux-gnu ${curFile}
+```
+
+7. [Optional] Set up systemd-binfmt and chroot arm64 for a transparent emulation process. Note that systemd-binfmt is not well supported on WSL, because it will break WSLinterop (https://github.com/ubuntu/WSL/issues/334), so currently it is recommended only on real virtual machines, though there are workarounds exist. Check the issue page for detail. 
+   
 ## Learn target
 
-After this section, the following knowledge needs to be acquired.
+After this section, the following knowledge should be acquired.
 
 1. Registers of arm64
 2. Basic instructions of arm64
