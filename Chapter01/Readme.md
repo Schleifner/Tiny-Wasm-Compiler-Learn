@@ -8,7 +8,7 @@ In this chapter, the first Wasm module will be compiled.
 2. Compile the opcode of the function `foo` to machine code.
 3. Load the machine code to memory region with execute access.
 4. Run the machine code.
-5. Configure a CI pipeline with [CodeQualityRequirement](./CodeQualityRequirement.md)
+5. Configure a CI pipeline with [CodeQualityRequirement](./CodeQualityRequirement.md). As a kind note, Github has recently added experimental support for arm64 runners, so it is also possible to skip qemu and run all natively. (https://github.blog/news-insights/product-news/arm64-on-github-actions-powering-faster-more-efficient-build-systems/)
 
 ## Docs
 
