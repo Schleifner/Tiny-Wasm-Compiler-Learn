@@ -22,4 +22,3 @@ This chapter will add div instructions. Div is a special instruction because it'
 1. Understand div instructions of Wasm and arm64.
 2. Understand the implication of two's complement on implementing div instructions.
 3. Trap mechanism of Wasm and C.
-4. Difference between b and bl instruction, ret and br instruction.
