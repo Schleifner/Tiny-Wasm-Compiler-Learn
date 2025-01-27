@@ -56,7 +56,7 @@ Arm64, also called aarch64, is an instruction set. For developers don't know thi
   ]
 }
 ```
-   
+
 ## Learn target
 
 After this section, the following knowledge should be acquired.
