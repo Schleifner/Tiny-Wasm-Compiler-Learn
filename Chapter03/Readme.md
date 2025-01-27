@@ -11,7 +11,7 @@ This chapter will add arithmetic instructions.
 ## Doc
 
 1. [Two's Complement representation of integers](https://www.cs.cornell.edu/~tomf/notes/cps104/twoscomp.html)
-2. If you don't know which instruction to emit for a feature, [godbolt](https://godbolt.org/) is a very helpful tool. You can write the feature you want with C/C++ and see what instruction does GCC/Clang emit. Add -O2 to emit better performance instruction. For example, following code can be used to check how to load large immediate number.
+2. If you don't know which instruction to emit for a feature, [godbolt](https://godbolt.org/) is a very helpful tool. You can write the function you want with C/C++ and see what instruction GCC/Clang emits. Add -O2 flag to emit better performance instruction. For example, following code can be used to check how to load large immediate number.
 
 ```cpp
 unsigned long long foo(){
