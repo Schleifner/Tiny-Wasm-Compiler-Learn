@@ -59,10 +59,10 @@ Arm64, also called aarch64, is an instruction set. For developers don't know thi
 
 ## Learn target
 
-After this section, the following knowledge should be acquired.
+After this section, the following knowledge needs to be acquired.
 
 1. Registers of arm64
-2. Basic instructions of arm64, including register mov instructions, memory load/store, basic arithmetic instructions, branch instructions, difference between b and bl instruction, ret and br instruction
+2. Basic instructions of arm64
 3. How to use gcc arm64 compiler
 4. Run arm64 program in qemu
 5. Debug arm64 program in vscode
