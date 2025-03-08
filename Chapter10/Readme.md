@@ -12,7 +12,7 @@ This chapter will add global variable.
 
 ## Doc
 
-1. From this chapter, the memory module of Wasm is getting complex. For having a better overview of Wasm memory module and designing the JIT compiler compile time/runtime binary layout better, it's recommended to watch [this speech video]("https://www.youtube.com/watch?v=CHj0AoUN82k").
+1. From this chapter, the memory module of Wasm is getting complex. For having a better overview of Wasm memory module and designing the JIT compiler compile time/runtime binary layout better, it's recommended to watch [this speech video](https://www.youtube.com/watch?v=CHj0AoUN82k).
 
 ## Learn target
 
