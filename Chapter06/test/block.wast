@@ -35,6 +35,9 @@
   (func (export "as-compare-left") (result i32)
     (block (result i32) (i32.le_u (br_if 0 (i32.const 1) (i32.const 1)) (i32.const 10)))
   )
+  (func (export "as-compare-right") (result i32)
+    (block (result i32) (i32.le_u (i32.const 10) (br_if 0 (i32.const 1) (i32.const 1))))
+  )
 
   (func (export "as-br_if-value") (result i32)
     (block (result i32)
