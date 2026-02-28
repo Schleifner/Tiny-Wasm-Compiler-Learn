@@ -15,6 +15,8 @@ This repo aims to provide a smooth learning curve for beginners, allowing develo
 
 Beginner developers who are interested at WebAssembly & compiler and want to start working this domain.
 
+See 🏆 [HALL-OF-FAME](finished_projects.md) 🏆 for an overview of people following this tutorial and their individual solutions.
+
 ## Learning target of this repository
 
 Develop a tiny **Wasm 1.0** JIT compiler for **arm64** with cmake and **C++ 14**. With following features:

@@ -1,6 +1,9 @@
 # Finished projects
 
-This is a list of finished implementation by learners which passed all required test cases.
+This is a list of finished implementations by learners which passed all required test cases:
 
-https://github.com/meowbmw/Tiny-Wasm/tree/CH13
-https://github.com/KKiiim/Tiny-WASM-Compiler
+Developer | Repository Link
+---|---
+[meowbmw](https://github.com/meowbmw) | https://github.com/meowbmw/Tiny-Wasm
+[KKiiim](https://github.com/KKiiim) | https://github.com/KKiiim/Tiny-WASM-Compiler
+[henrythasler](https://github.com/henrythasler) | https://github.com/henrythasler/wasm-playground
