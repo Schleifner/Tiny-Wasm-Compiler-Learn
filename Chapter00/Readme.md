@@ -43,15 +43,39 @@ Arm64, also called aarch64, is an instruction set. For developers don't know thi
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "gdb",
-      "request": "attach",
-      "name": "Debug arm64",
+      "name": "Debug Arm64",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/<your_executable>",
+      "cwd": "${workspaceFolder}",
+      "MIMode": "gdb",
       "miDebuggerPath": "/usr/bin/gdb-multiarch",
-      "executable": "your_executable",
-      "target": "<TARGET_IP>:2345",
-      "remote": true,
-      "cwd": "${workspaceRoot}",
-      "valuesFormatting": "parseText"
+      "miDebuggerArgs": "--nx",
+      "miDebuggerServerAddress": "<TARGET_IP>:2345",
+      "stopAtEntry": true,
+      "externalConsole": false,
+      "setupCommands": [
+        {
+          "description": "Do not prompt for debuginfod",
+          "text": "set debuginfod enabled off",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Set AArch64 before connecting",
+          "text": "set architecture aarch64",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Find the AArch64 dynamic linker and libc",
+          "text": "set sysroot /usr/aarch64-linux-gnu",
+          "ignoreFailures": true
+        },
+        {
+          "description": "Enable pretty-printing",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
     }
   ]
 }
