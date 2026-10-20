@@ -19,7 +19,7 @@ jobs:
         node-version: '18'
 
     - name: Install cspell
-      run: npm install -g cspell prettier
+      run: npm install -g cspell@8 prettier@3
 
     - name: Run cspell
       run: cspell "**/*.md"
