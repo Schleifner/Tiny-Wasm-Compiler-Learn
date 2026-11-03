@@ -1,42 +1,38 @@
-# Introduction
+# Chapter 00: Foundations (WebAssembly + Arm64)
 
-This Chapter provide beginner guide about Wasm and Arm64.
+This chapter builds the minimum background needed for the rest of the project.
 
-## Getting Start with WebAssembly
+## Learning goals
 
-WebAssembly is already widely used in browser and nodejs.
-To get a general understanding of WebAssembly, please visit the [WebAssembly official website](https://webassembly.org/).
+By the end of this chapter, you should be able to:
 
-Then learn about what is [wat](https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format)
+1. Explain what [WebAssembly (Wasm)](#term-wasm) is and what [WAT](#term-wat) (text format) looks like.
+2. Write and run small Wasm examples in Node.js.
+3. Read and write basic Arm64 assembly.
+4. Build and run [Arm64](#term-arm64) binaries (native or via [QEMU user mode](#term-qemu-user-mode)).
+5. Debug Arm64 programs with [GDB (`gdb-multiarch`)](#term-gdb-multiarch)/VS Code.
 
-## Tasks to do
+## Task breakdown
 
-1. Implement following Wasm functions with wat. [Doc](https://developer.mozilla.org/en-US/docs/WebAssembly/Text_format_to_Wasm)<br/>
-   1.1 calculate sum of 1 to n, n is i32 type<br/>
-   1.2 Fibonacci sequence<br/>
-2. Run the functions with nodejs. [Doc](https://nodejs.org/en/learn/getting-started/nodejs-with-webassembly)
+### Part A: Wasm basics
 
-## Learn target
+1. Write two functions in WAT:
+   1. `sum(1..n)` with `i32` input.
+   2. Fibonacci sequence (example: `f(0)=0`, `f(1)=1`, `f(2)=1`, `f(3)=2`, `f(4)=3`, `f(5)=5`, `f(6)=8`).
+2. Convert WAT to Wasm and run from Node.js.
+3. Verify outputs with several test inputs (small, medium, edge cases).
 
-After this section, the following knowledge needs to be acquired
+### Part B: Arm64 basics
 
-1. Basic knowledge with Wasm and Wat
-2. How to install and use [wabt](https://github.com/webassembly/wabt)
+1. Re-implement the same two functions in Arm64 assembly.
+2. Compile with an Arm64 toolchain.
+3. Call assembly functions from C/C++.
+4. Run with QEMU user mode if your host is not Arm64.
+5. Debug with `gdb-multiarch` + VS Code.
 
-## Getting start with Arm64
+### Part C: Debug setup (GDB + VS Code launch.json)
 
-Arm64, also called aarch64, is an instruction set. For developers don't know this, refer to this [wiki](https://en.wikipedia.org/wiki/AArch64)
-
-## Tasks to do
-
-1. Implement following Wasm functions with arm64 asm.[Doc](https://book.hacktricks.xyz/macos-hardening/macos-security-and-privilege-escalation/macos-apps-inspecting-debugging-and-fuzzing/arm64-basic-assembly)<br/>
-   1.1 calculate sum of 1 to n, n is i32 type<br/>
-   1.2 Fibonacci sequence<br/>
-2. Compile the asm with arm64 gcc.[Doc](https://azeria-labs.com/arm-on-x86-qemu-user/)
-3. Call the asm functions from C. [Doc](https://learn.microsoft.com/en-us/cpp/build/arm64-windows-abi-conventions?view=msvc-170)
-4. Run the code with qemu user mode emulator.
-5. Setup gdb debugger and vscode launch.json to debug the program running in qemu. [Doc](https://code.visualstudio.com/docs/cpp/launch-json-reference)<br/>
-   demo launch.json.
+Use this as a starting point for remote/user-mode debugging (for example, QEMU + `gdbserver`):
 
 ```json
 {
@@ -56,17 +52,17 @@ Arm64, also called aarch64, is an instruction set. For developers don't know thi
       "externalConsole": false,
       "setupCommands": [
         {
-          "description": "Do not prompt for debuginfod",
+          "description": "Disable debuginfod prompts",
           "text": "set debuginfod enabled off",
           "ignoreFailures": true
         },
         {
-          "description": "Set AArch64 before connecting",
+          "description": "Set architecture before connecting",
           "text": "set architecture aarch64",
           "ignoreFailures": true
         },
         {
-          "description": "Find the AArch64 dynamic linker and libc",
+          "description": "Set sysroot for dynamic linker and libc",
           "text": "set sysroot /usr/aarch64-linux-gnu",
           "ignoreFailures": true
         },
@@ -81,17 +77,61 @@ Arm64, also called aarch64, is an instruction set. For developers don't know thi
 }
 ```
 
-## Learn target
+Quick checks:
 
-After this section, the following knowledge should be acquired.
+1. Replace `<your_executable>` and `<TARGET_IP>`.
+2. Ensure `gdb-multiarch` is installed and available at the configured path.
+3. Make sure your target process is started with `gdbserver` on port `2345`.
 
-1. Registers of arm64
-2. Basic instructions of arm64, including register mov instructions, memory load/store, basic arithmetic instructions, branch instructions, difference between b and bl instruction, ret and br instruction
-3. How to use gcc arm64 compiler
-4. Run arm64 program in qemu
-5. Debug arm64 program in vscode
-6. C ABI of arm64
+## Study tips, tools, and best practices
 
-## Extended read
+1. Keep each function tiny at first; add complexity only after it works.
+2. Always compare outputs between Wasm and Arm64 implementations.
+3. Use disassembly tools early to confirm generated instructions.
+4. Keep one reproducible build/run script per experiment.
+5. Record assumptions ([ABI](#term-abi), register usage, stack alignment) in notes.
 
-1. What is [qemu](https://medium.com/@cds.chamath/whats-qemu-c47c2d0297d3)
+Recommended tools:
+
+1. [wabt](https://github.com/webassembly/wabt) (`wat2wasm`, `wasm2wat`)
+2. Node.js Wasm runtime support ([guide](https://nodejs.org/en/learn/getting-started/nodejs-with-webassembly))
+3. Arm64 cross compiler + binutils
+4. QEMU user mode
+5. `gdb-multiarch` + VS Code launch config
+
+## Knowledge checklist
+
+Before moving to Chapter 01, confirm you understand:
+
+1. Wasm module/function basics, value stack, and integer types.
+2. WAT syntax for constants, locals, arithmetic, and exports.
+3. Arm64 registers, `mov`/load/store/arithmetic/branch basics.
+4. Difference between `b` and `bl`, and between `ret` and indirect branch.
+5. Arm64 calling convention basics (arguments, return values, caller/callee-saved registers).
+
+## Core references
+
+1. WebAssembly overview: https://webassembly.org/
+2. WAT format (MDN): https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format
+3. Text-to-binary workflow: https://developer.mozilla.org/en-US/docs/WebAssembly/Text_format_to_Wasm
+4. AArch64 overview (wiki): https://en.wikipedia.org/wiki/AArch64
+5. Arm64 basic assembly tutorial: https://book.hacktricks.xyz/macos-hardening/macos-security-and-privilege-escalation/macos-apps-inspecting-debugging-and-fuzzing/arm64-basic-assembly
+6. Running Arm binaries with QEMU: https://azeria-labs.com/arm-on-x86-qemu-user/
+7. Arm64 ABI notes (reference): https://learn.microsoft.com/en-us/cpp/build/arm64-windows-abi-conventions?view=msvc-170
+8. VS Code C/C++ launch config docs: https://code.visualstudio.com/docs/cpp/launch-json-reference
+
+## Extended reading
+
+1. QEMU intro article: https://medium.com/@cds.chamath/whats-qemu-c47c2d0297d3
+2. Book: _Computer Organization and Design: ARM Edition_ (Patterson & Hennessy)
+3. Video playlist (AArch64): https://www.youtube.com/results?search_query=aarch64+assembly+tutorial
+
+## Terms
+
+1. <a id="term-wasm"></a>**Wasm (WebAssembly):** A portable binary instruction format designed for safe and fast execution.
+2. <a id="term-wat"></a>**WAT:** The human-readable text format of Wasm modules.
+3. <a id="term-arm64"></a>**Arm64 / AArch64:** The 64-bit ARM instruction set architecture.
+4. <a id="term-abi"></a>**ABI (Application Binary Interface):** Low-level calling rules (arguments, return values, register usage, stack layout).
+5. <a id="term-qemu-user-mode"></a>**QEMU user mode:** Runs binaries for another CPU architecture without booting a full virtual machine.
+6. <a id="term-gdb-multiarch"></a>**`gdb-multiarch`:** GDB build that can debug programs for multiple CPU architectures.
+7. <a id="term-sysroot"></a>**`sysroot`:** Directory that provides target runtime libraries/symbols for cross-debugging.

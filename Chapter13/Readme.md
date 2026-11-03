@@ -1,29 +1,68 @@
-# Introduction
+# Chapter 13: Imported native functions
 
-This chapter will add import native function call. WebAssembly is a sandbox, when it need to use resources out of the sandbox, for example the file system, it need to call an imported native function.
+This chapter connects Wasm code to [host functions](#term-host-function) ([sandbox boundary](#term-sandbox-boundary) crossing).
 
-Moreover, in real engineering projects, Wasm is usually compiled from frontend programming languages, such as C/C++, rust and AssemblyScript. This chapter uses clang to compile C to Wasm.
+## Learning goals
 
-## Task to do
+1. Parse and register [import functions](#term-import-function).
+2. Link Wasm call sites to host C/C++ function pointers.
+3. Call native functions with correct ABI and [stack alignment](#term-stack-alignment).
+4. Compile C source to Wasm with [WASI](#term-wasi-webassembly-system-interface) SDK and execute `_start`.
 
-1. Support import function<br/>
-   1.1 Support import section of Wasm.<br/>
-   1.2 Design how to link Wasm call with C function.<br/>
-   1.3 Call native function with C ABI.<br/>
+## Task breakdown
 
-2. Compile the [test/myPrint.c](./test/myPrint.c) to Wasm with [Wasi-SDK](https://github.com/WebAssembly/wasi-sdk). Example Compile command `/opt/wasi-sdk/bin/clang -fdata-sections -ffunction-sections -mcpu=mvp -mmutable-globals -Wl,--allow-undefined,--export-table,--gc-sections,--no-entry,--export=_start -lstdc++ -z stack-size=8192 -nostartfiles -o build/main.wasm main.c`
-3. Run the `_start` function of the Wasm, and output the print message both to console and a log file.
-4. Assert the content in the log file.
-5. Add the test to CI pipeline.
+1. Implement import section handling.
+2. Build an import registry (module + name -> [host function](#term-host-function) metadata).
+3. Implement Wasm-to-native call bridge with ABI-safe argument passing.
+4. Compile [`test/myPrint.c`](./test/myPrint.c) using WASI-SDK.
+5. Run `_start`, print to console and file, and assert expected log output.
+6. Add test coverage to CI.
 
-## Doc
+## Study tips, tools, and best practices
 
-1. [WebAssembly with different languages](https://enarx.dev/docs/WebAssembly/Introduction)
-2. [Pay attention to stack alignment when calling C API](https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/using-the-stack-in-aarch32-and-aarch64)
+1. Define strict type/signature matching for imports.
+2. Keep host-call bridge minimal and auditable.
+3. Validate stack alignment at each native call boundary.
+4. Build deterministic integration tests (same inputs, same log file content).
+5. Version and document your import registry format.
+6. Keep a reproducible WASI-SDK compile command example for quick experiments:
 
-## Learn target
+```bash
+/opt/wasi-sdk/bin/clang \
+  -fdata-sections -ffunction-sections -mcpu=mvp -mmutable-globals \
+  -Wl,--allow-undefined,--export-table,--gc-sections,--no-entry,--export=_start \
+  -lstdc++ -z stack-size=8192 -nostartfiles \
+  -o build/main.wasm main.c
+```
 
-1. Basic usage of Wasi-SDK.
-2. Understand C memory layout and C variadic mapped to Wasm memory layout.
-3. Understand import section of Wasm.
-4. Understand calling C function from JIT code.
+## Knowledge checklist
+
+1. Wasm import section semantics.
+2. WASI SDK compile flow from C to Wasm.
+3. Arm64 C ABI and stack alignment rules.
+4. Host sandbox boundary and security implications.
+
+## Core references
+
+1. WASI SDK: https://github.com/WebAssembly/wasi-sdk
+2. WebAssembly language ecosystem intro:
+   https://enarx.dev/docs/WebAssembly/Introduction
+3. Arm stack alignment guidance:
+   https://community.arm.com/arm-community-blogs/b/architectures-and-processors-blog/posts/using-the-stack-in-aarch32-and-aarch64
+4. Wasm imports reference (MDN):
+   https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format#importing_functions_from_javascript
+
+## Extended reading
+
+1. WASI design overview:
+   https://github.com/WebAssembly/WASI
+2. Video search: “WASI SDK tutorial”:
+   https://www.youtube.com/results?search_query=wasi+sdk+tutorial
+
+## Terms
+
+1. <a id="term-import-function"></a>**Import function:** Function declared in Wasm but implemented by the host runtime.
+2. <a id="term-host-function"></a>**Host function:** Native C/C++ function callable from Wasm.
+3. <a id="term-wasi-webassembly-system-interface"></a>**WASI (WebAssembly System Interface):** Standardized system-like APIs for Wasm runtimes.
+4. <a id="term-stack-alignment"></a>**Stack alignment:** Required stack address alignment before function calls (ABI requirement).
+5. <a id="term-sandbox-boundary"></a>**Sandbox boundary:** Safety boundary between untrusted Wasm code and host system resources.
