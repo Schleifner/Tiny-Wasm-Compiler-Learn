@@ -1,29 +1,134 @@
-# Introduction
+# Chapter 01: Compile and run your first Wasm function
 
-In this chapter, the first Wasm module will be compiled.
+This chapter delivers the first end-to-end milestone: parse [Wasm](#term-wasm) bytes, emit Arm64 machine code, and execute it safely.
 
-## Task to do
+## Learning goals
 
-1. Parser the wasm module byte by byte. Note: integers are encoded in [LEB128](https://en.wikipedia.org/wiki/LEB128)
-2. Compile the opcode of the function `foo` to machine code.
-3. Load the machine code to memory region with execute access.
-4. Run the machine code.
-5. Configure a CI pipeline with [CodeQualityRequirement](./CodeQualityRequirement.md). As a kind note, Github has recently added experimental support for arm64 runners, so it is also possible to skip qemu and run all natively. (https://github.blog/news-insights/product-news/arm64-on-github-actions-powering-faster-more-efficient-build-systems/)
+1. Parse a minimal Wasm module byte-by-byte.
+2. Decode key fields (including [LEB128](#term-leb128) integers).
+3. [Emit](#term-codegen) Arm64 machine code for a simple function (for example `foo`).
+4. Allocate executable memory correctly (`mmap`/`mprotect`).
+5. Execute generated code and inspect it with [disassembly](#term-disassembly) tools.
+6. Explain the full path from source code to assembly to machine code in a [JIT](#term-jit) pipeline.
 
-## Docs
+## From source code to machine code (mental model)
 
-1. [Wasm 1.0 spec](https://webassembly.github.io/spec/versions/core/WebAssembly-1.0.pdf)
-2. [Helpful tool to view wasm bytecode](https://webassembly.github.io/wabt/demo/wat2wasm/)
-3. [Arm64 instruction set](https://developer.arm.com/documentation/ddi0596/2020-12/Base-Instructions?lang=en)
-4. [Arm64 online assembler](https://shell-storm.org/online/Online-Assembler-and-Disassembler)
-5. Arm64 instruction encoding can be summarized into several patterns. Detailed info can be found at [A64 instruction set encoding](https://developer.arm.com/documentation/ddi0602/2024-12/Index-by-Encoding/Data-Processing----Register).
-6. Dump disassembly of emitted JIT code binary with [aarch64-linux-gnu-objdump](https://linux.die.net/man/1/aarch64-linux-gnu-objdump)(example `aarch64-linux-gnu-objdump -D -b binary -m aarch64 raw_binary.bin`) or [capstone](https://github.com/capstone-engine/capstone). There is also a nice website [Online Two-Way Converter](https://armconverter.com).
-7. Manage memory permission on Linux/Posix: [mmap](https://man7.org/linux/man-pages/man2/mmap.2.html) [mprotect](https://man7.org/linux/man-pages/man2/mprotect.2.html)
-8. **Important** Arm64 has separated [instruction cache and data cache](https://developer.arm.com/documentation/den0013/d/Caches/Invalidating-and-cleaning-cache-memory). This can impact the JIT code execution. For reader doesn't understand this item, please learn **Computer Organization and Architecture**.
+```text
+C/C++ source (or WAT)
+        |
+        v
+Wasm binary (.wasm bytes)
+        |
+        v
+Parse + Decode
+  - parse: split bytes into sections/opcodes
+  - decode: turn encoded numbers/operands (e.g., LEB128) into usable values
+        |
+        v
+Codegen decision
+        |
+        v
+Arm64 assembly (human-readable intent, conceptual)
+        |
+        v
+Arm64 machine code (actual bytes)
+        |
+        v
+Allocate executable memory + copy bytes + set RX
+        |
+        v
+Call function pointer and run
+```
 
-## Learn target
+In this chapter, you mostly implement the lower half of the pipeline: parsing/decoding Wasm bytes, then emitting Arm64 machine-code bytes and executing them.
 
-1. Parse Wasm byte code
-2. Emit Arm64 machine code
-3. Memory permission on Linux
-4. Ensure code quality with CodeQualityRequirement. Know basic C++ code quality measurements.
+### What each step does in Chapter 01
+
+| Step     | What it does                                                                                             | Why it matters                                                                |
+| -------- | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| Parse    | Reads the `.wasm` byte stream and identifies module structure (magic, version, sections, function body). | Without parsing, the compiler does not know where code/data begin or end.     |
+| Decode   | Converts encoded values (especially LEB128 integers) into normal numeric values used by your compiler.   | Wrong decode means wrong lengths/indices/immediates and broken codegen.       |
+| Emit     | Translates Wasm operations into Arm64 machine-code bytes.                                                | This is the core of JIT compilation: behavior -> executable instructions.     |
+| Allocate | Reserves memory, writes emitted bytes, then changes permissions for execution (`mmap`/`mprotect`).       | Generated code cannot run safely/correctly without proper memory permissions. |
+
+## Task breakdown
+
+1. Build a small Wasm parser:
+   1. Validate magic/version.
+   2. Parse sections needed for one exported function.
+   3. Decode LEB128 values correctly.
+2. Implement code generation for function `foo`.
+3. Allocate writable memory, copy code, then switch to executable permissions.
+4. Call generated code from C++ and assert the result.
+5. Set up CI and code quality checks using [CodeQualityRequirement](./CodeQualityRequirement.md).
+
+## Study tips, tools, and best practices
+
+1. Start with a single known test module and print parser traces.
+2. Keep parser and codegen independent modules to simplify debugging.
+3. Always disassemble generated bytes when output is wrong.
+4. Follow [W^X](#term-wx) style memory transitions (write first, execute later).
+5. Keep CI passing from this chapter onward; each next chapter should extend, not break.
+6. Keep one disassembly command ready while debugging emitted binary blobs, for example:
+
+```bash
+aarch64-linux-gnu-objdump -D -b binary -m aarch64 raw_binary.bin
+```
+
+### Beginner guideline: how to read the Wasm spec without getting lost
+
+If the official spec feels too dense, use this order:
+
+1. First read MDN overviews to build intuition.
+2. Then use the reader-friendly manual.
+3. Only then open the official Wasm spec for exact rules/details.
+
+When reading the official spec in this chapter, focus only on:
+
+1. Binary format basics (magic + version).
+2. Section structure and ordering.
+3. LEB128 integer encoding.
+
+Do not try to read the whole spec in one pass.
+
+## Knowledge checklist
+
+1. Wasm binary layout and section ordering.
+2. [LEB128](#term-leb128) decoding for signed/unsigned integers.
+3. Arm64 instruction encoding basics.
+4. Runtime code memory permissions on Linux/POSIX.
+5. Why [I-cache / D-cache](#term-icache-dcache) behavior matters for JITs on Arm64.
+
+## Core references
+
+1. Wasm concepts (beginner-friendly, MDN): https://developer.mozilla.org/en-US/docs/WebAssembly/Concepts
+2. WAT syntax and examples (MDN): https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format
+3. Reader-friendly Wasm manual: https://github.com/sunfishcode/wasm-reference-manual/blob/master/WebAssembly.md
+4. Official Wasm 1.0 spec (authoritative reference): https://webassembly.github.io/spec/versions/core/WebAssembly-1.0.pdf
+5. LEB128 intro: https://en.wikipedia.org/wiki/LEB128
+6. WABT online viewer: https://webassembly.github.io/wabt/demo/wat2wasm/
+7. Arm64 instruction reference: https://developer.arm.com/documentation/ddi0596/2020-12/Base-Instructions?lang=en
+8. A64 encoding index: https://developer.arm.com/documentation/ddi0602/2024-12/Index-by-Encoding/Data-Processing----Register
+9. Arm64 online assembler/disassembler: https://shell-storm.org/online/Online-Assembler-and-Disassembler
+10. `mmap`: https://man7.org/linux/man-pages/man2/mmap.2.html
+11. `mprotect`: https://man7.org/linux/man-pages/man2/mprotect.2.html
+12. Arm cache behavior for self-modifying code: https://developer.arm.com/documentation/den0013/d/Caches/Invalidating-and-cleaning-cache-memory
+13. Local quick reference (added by you): [ARM_cheatsheet.pdf](./ARM_cheatsheet.pdf)
+14. `objdump` binary disassembly (example command above): https://linux.die.net/man/1/aarch64-linux-gnu-objdump
+
+## Extended reading
+
+1. Capstone disassembly framework: https://github.com/capstone-engine/capstone
+2. ArmConverter tool: https://armconverter.com
+3. GitHub Arm64 runners announcement: https://github.blog/news-insights/product-news/arm64-on-github-actions-powering-faster-more-efficient-build-systems/
+4. Video search (Wasm binary format for beginners): https://www.youtube.com/results?search_query=webassembly+binary+format+for+beginners
+
+## Terms
+
+1. <a id="term-jit"></a>**JIT (Just-In-Time compilation):** Compiling code at runtime into machine code, then executing it directly.
+2. <a id="term-leb128"></a>**LEB128:** A variable-length integer encoding used in Wasm binaries.
+3. <a id="term-codegen"></a>**Codegen:** Short for code generation; translating an intermediate representation into target machine instructions.
+4. <a id="term-disassembly"></a>**Disassembly:** Converting machine-code bytes back into assembly text for inspection.
+5. <a id="term-wx"></a>**W^X:** Memory-safety policy where a page is writable or executable, but not both at the same time.
+6. <a id="term-icache-dcache"></a>**I-cache / D-cache:** Instruction/data CPU caches; JIT code updates may require cache-coherency care on some architectures.
+7. <a id="term-wasm"></a>**Wasm:** Short name for WebAssembly.
