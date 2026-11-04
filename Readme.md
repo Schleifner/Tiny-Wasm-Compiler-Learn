@@ -50,6 +50,32 @@ Develop a tiny **Wasm 1.0** JIT compiler for **arm64** with cmake and **C++ 14**
 -Wwrite-strings -Wpointer-arith -Wfloat-conversion -Wnull-dereference -Wdiv-by-zero
 -Wswitch-default -Wno-switch-bool -Wunknown-pragmas -Werror`
 
+### Pre-commit checks (cspell + prettier)
+
+Use this helper script before each commit:
+
+1. Check only:
+   ```bash
+   ./scripts/pre-commit-check.sh check
+   ```
+   (CI-parity mode, same as `./scripts/pre-commit-check.sh ci`)
+2. Auto-fix formatting + run checks:
+   ```bash
+   ./scripts/pre-commit-check.sh fix
+   ```
+3. Add project-specific dictionary words while fixing:
+   ```bash
+   ./scripts/pre-commit-check.sh fix --add-word yourWord anotherWord
+   ```
+
+Notes:
+
+1. The script is aligned with CI workflow versions: **cspell@8** and **prettier@3**.
+2. CI and local script both target `**/*.md`.
+3. `prettier` will auto-format files in `fix` mode.
+4. `cspell` checks spelling but does not auto-correct typos.
+5. The script warns if your local Node.js major version differs from CI (`18`).
+
 ### FAQ
 
 1. Why chose arm64 instruction set?
@@ -73,3 +99,64 @@ In [Learning_Materials](./Learning_Materials) there are some recommended curses
 For developers without basic knowledge of Wasm and arm64, start with [Chapter 00](./Chapter00/).
 
 Otherwise, start with [Chapter 01](./Chapter01/), and then implement the compiler chapter by chapter
+
+## Overview map
+
+### What you can do after finishing this repository
+
+1. Parse core Wasm 1.0 module structures and execute exported functions.
+2. Build a tiny Arm64-oriented JIT pipeline (decode -> codegen -> executable memory -> run).
+3. Implement key integer/control/runtime features: locals, arithmetic, branches, calls, table-based indirect calls, globals, linear memory, imports, and basic traps.
+4. Build a test-driven workflow using chapter test cases and CI/code-quality constraints.
+
+### What is intentionally not covered here
+
+1. Full Wasm validation engine.
+2. Floating-point instruction support.
+3. Advanced optimization passes (SSA-based IR optimization, register allocation quality tuning, instruction scheduling).
+4. Production features such as GC integration, full sandbox hardening, tiered JIT/AOT strategies, and multi-architecture backends.
+
+### What to learn next (with resources)
+
+1. Wasm validation and semantics deep dive:
+   1. https://webassembly.github.io/spec/core/
+   2. https://github.com/WebAssembly/testsuite
+2. Production-grade runtime/codegen architecture:
+   1. https://github.com/bytecodealliance/wasmtime
+   2. https://github.com/bytecodealliance/wasmtime/tree/main/cranelift
+3. Compiler optimization foundations:
+   1. _Engineering a Compiler_ (Cooper & Torczon)
+   2. _Compilers: Principles, Techniques, and Tools_ (Aho et al.)
+4. JIT/runtime engineering practice:
+   1. https://v8.dev/blog
+   2. https://bytecodealliance.org/articles
+5. Video resources:
+   1. MIT 6.035 (Compiler course): https://www.youtube.com/watch?v=9p_s457RSQE
+   2. Carnegie Mellon 15-213 / 18-213 (Computer Systems): https://www.youtube.com/watch?v=ScMxnXq6fbI&list=PLcQU3vbfgCc9sVAiHf5761UUApjZ3ZD3x
+   3. AArch64 assembly tutorials (search collection): https://www.youtube.com/results?search_query=aarch64+assembly+tutorial
+   4. WebAssembly internals talks (search collection): https://www.youtube.com/results?search_query=webassembly+compiler+internals
+6. Wiki / encyclopedia resources:
+   1. WebAssembly (wiki): https://en.wikipedia.org/wiki/WebAssembly
+   2. AArch64 (wiki): https://en.wikipedia.org/wiki/AArch64
+   3. Compiler (wiki): https://en.wikipedia.org/wiki/Compiler
+   4. Just-in-time compilation (wiki): https://en.wikipedia.org/wiki/Just-in-time_compilation
+   5. Register allocation (wiki): https://en.wikipedia.org/wiki/Register_allocation
+
+## Chapter-by-chapter goals
+
+| Chapter                            | Goal                                                                                                             |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| [Chapter00](./Chapter00/Readme.md) | Build baseline knowledge in Wasm/WAT, Arm64 assembly, toolchain, QEMU, and debugging setup.                      |
+| [Chapter01](./Chapter01/Readme.md) | Implement first end-to-end path: parse Wasm bytes, emit Arm64 machine code, allocate executable memory, and run. |
+| [Chapter02](./Chapter02/Readme.md) | Add parameter/local handling and implement `local.get/set/tee` with test-driven validation.                      |
+| [Chapter03](./Chapter03/Readme.md) | Add integer arithmetic instructions and strengthen instruction-selection/codegen debugging workflow.             |
+| [Chapter04](./Chapter04/Readme.md) | Implement conditional execution (`if/else` + compare + `nop`) with patchable control-flow targets.               |
+| [Chapter05](./Chapter05/Readme.md) | Implement division plus runtime traps (divide-by-zero/overflow) and host-visible trap propagation.               |
+| [Chapter06](./Chapter06/Readme.md) | Implement `block/br/br_if/drop` and reason about structured branching via label depth.                           |
+| [Chapter07](./Chapter07/Readme.md) | Implement `loop` and backward branches, including nested loop-control behavior.                                  |
+| [Chapter08](./Chapter08/Readme.md) | Implement direct Wasm-to-Wasm calls with type-section support and a stable calling convention.                   |
+| [Chapter09](./Chapter09/Readme.md) | Implement tables, elements, and `call_indirect` with bounds/signature checks and traps.                          |
+| [Chapter10](./Chapter10/Readme.md) | Implement global variables (`global.get/set`) and global runtime layout.                                         |
+| [Chapter11](./Chapter11/Readme.md) | Implement linear memory, data segments, memory access/growth, and out-of-bounds trap handling.                   |
+| [Chapter12](./Chapter12/Readme.md) | Add stack-overflow protection and convert unsafe growth into controlled runtime traps.                           |
+| [Chapter13](./Chapter13/Readme.md) | Implement imported native function calls (host bridge, ABI correctness, WASI-SDK integration).                   |
