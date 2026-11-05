@@ -1,4 +1,6 @@
-# Introduction
+# Chapter 03: Arithmetic operations
+
+## Introduction
 
 This chapter will add arithmetic instructions.
 
@@ -23,3 +25,17 @@ unsigned long long foo(){
 
 1. Understand arithmetic instructions of Wasm and arm64.
 2. How to encode large immediate number in arm64.
+
+## Core references
+
+1. Two’s complement primer: https://www.cs.cornell.edu/~tomf/notes/cps104/twoscomp.html
+2. Compiler Explorer: https://godbolt.org/
+3. Wasm numeric instruction reference (MDN): https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/Numeric
+4. Arm doc usage guide for this chapter: [ARM_Documentation_Quick_Guide.md](./ARM_Documentation_Quick_Guide.md)
+
+## Extended reading
+
+1. Arm Architecture Reference Manual (A64 base instructions):
+   https://developer.arm.com/documentation/ddi0596/latest
+2. Video search: “Arm64 arithmetic instructions explained”:
+   https://www.youtube.com/results?search_query=arm64+arithmetic+instructions

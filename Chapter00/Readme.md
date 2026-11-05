@@ -1,4 +1,6 @@
-# Introduction
+# Chapter 00: Foundations (WebAssembly + Arm64)
+
+## Introduction
 
 This Chapter provide beginner guide about Wasm and Arm64.
 
@@ -22,6 +24,14 @@ After this section, the following knowledge needs to be acquired
 
 1. Basic knowledge with Wasm and Wat
 2. How to install and use [wabt](https://github.com/webassembly/wabt)
+
+Recommended tools:
+
+1. [wabt](https://github.com/webassembly/wabt) (`wat2wasm`, `wasm2wat`)
+2. Node.js Wasm runtime support ([guide](https://nodejs.org/en/learn/getting-started/nodejs-with-webassembly))
+3. Arm64 cross compiler + binutils
+4. QEMU user mode
+5. `gdb-multiarch` + VS Code launch config
 
 ## Getting start with Arm64
 
@@ -92,6 +102,19 @@ After this section, the following knowledge should be acquired.
 5. Debug arm64 program in vscode
 6. C ABI of arm64
 
-## Extended read
+## Core references
 
-1. What is [qemu](https://medium.com/@cds.chamath/whats-qemu-c47c2d0297d3)
+1. WebAssembly overview: https://webassembly.org/
+2. WAT format (MDN): https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding_the_text_format
+3. Text-to-binary workflow: https://developer.mozilla.org/en-US/docs/WebAssembly/Text_format_to_Wasm
+4. AArch64 overview (wiki): https://en.wikipedia.org/wiki/AArch64
+5. Arm64 basic assembly tutorial: https://book.hacktricks.xyz/macos-hardening/macos-security-and-privilege-escalation/macos-apps-inspecting-debugging-and-fuzzing/arm64-basic-assembly
+6. Running Arm binaries with QEMU: https://azeria-labs.com/arm-on-x86-qemu-user/
+7. Arm64 ABI notes (reference): https://learn.microsoft.com/en-us/cpp/build/arm64-windows-abi-conventions?view=msvc-170
+8. VS Code C/C++ launch config docs: https://code.visualstudio.com/docs/cpp/launch-json-reference
+
+## Extended reading
+
+1. QEMU intro article: https://medium.com/@cds.chamath/whats-qemu-c47c2d0297d3
+2. Book: _Computer Organization and Design: ARM Edition_ (Patterson & Hennessy)
+3. Video playlist (AArch64): https://www.youtube.com/results?search_query=aarch64+assembly+tutorial

@@ -30,7 +30,7 @@ Develop a tiny **Wasm 1.0** JIT compiler for **arm64** with cmake and **C++ 14**
 7. Indirect function call
 8. Global variable
 9. Linear memory
-10. Import function call
+10. Import/Export function call
 
 ### Out of scope:
 
@@ -44,7 +44,7 @@ Develop a tiny **Wasm 1.0** JIT compiler for **arm64** with cmake and **C++ 14**
 3. Use the [.clang-tidy](./clang-tidy) for linter. [Doc](https://clang.llvm.org/extra/clang-tidy/)
 4. Enable the warning flags of of gcc `-Wall -Wextra -Wpedantic  -Wformat=2
 -Wformat-security -Werror=format-security -Wcast-align -Wcast-qual -Wconversion
--Wdouble-promotion -Wfloat-equal -Wmissing-include-dirs 
+-Wdouble-promotion -Wfloat-equal -Wmissing-include-dirs
 -Wredundant-decls -Wshadow -Wsign-conversion -Wswitch -Wuninitialized
 -Wunused-parameter -Walloca -Wunused-result -Wunused-local-typedefs
 -Wwrite-strings -Wpointer-arith -Wfloat-conversion -Wnull-dereference -Wdiv-by-zero
