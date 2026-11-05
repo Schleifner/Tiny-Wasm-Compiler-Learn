@@ -1,4 +1,6 @@
-# Introduction
+# Chapter 00: Foundations (WebAssembly + Arm64)
+
+## Introduction
 
 This Chapter provide beginner guide about Wasm and Arm64.
 
@@ -22,6 +24,14 @@ After this section, the following knowledge needs to be acquired
 
 1. Basic knowledge with Wasm and Wat
 2. How to install and use [wabt](https://github.com/webassembly/wabt)
+
+Recommended tools:
+
+1. [wabt](https://github.com/webassembly/wabt) (`wat2wasm`, `wasm2wat`)
+2. Node.js Wasm runtime support ([guide](https://nodejs.org/en/learn/getting-started/nodejs-with-webassembly))
+3. Arm64 cross compiler + binutils
+4. QEMU user mode
+5. `gdb-multiarch` + VS Code launch config
 
 ## Getting start with Arm64
 
@@ -92,6 +102,9 @@ After this section, the following knowledge should be acquired.
 5. Debug arm64 program in vscode
 6. C ABI of arm64
 
-## Extended read
+## Extended reading
 
-1. What is [qemu](https://medium.com/@cds.chamath/whats-qemu-c47c2d0297d3)
+1. AArch64 overview (wiki): https://en.wikipedia.org/wiki/AArch64
+2. QEMU intro article: https://medium.com/@cds.chamath/whats-qemu-c47c2d0297d3
+3. Book: _Computer Organization and Design: ARM Edition_ (Patterson & Hennessy)
+4. Video playlist (AArch64): https://www.youtube.com/results?search_query=aarch64+assembly+tutorial

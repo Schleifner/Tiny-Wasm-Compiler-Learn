@@ -1,4 +1,6 @@
-# Introduction
+# Chapter 03: Arithmetic operations
+
+## Introduction
 
 This chapter will add arithmetic instructions.
 
@@ -12,6 +14,8 @@ This chapter will add arithmetic instructions.
 
 1. [Two's Complement representation of integers](https://www.cs.cornell.edu/~tomf/notes/cps104/twoscomp.html)
 2. If you don't know which instruction to emit for a feature, [godbolt](https://godbolt.org/) is a very helpful tool. You can write the function you want with C/C++ and see what instruction GCC/Clang emits. Add -O2 flag to emit better performance instruction. For example, following code can be used to check how to load large immediate number.
+3. Wasm numeric instruction reference (MDN): https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/Numeric
+4. [Arm Guide](https://github.com/mikeroyal/ARM-Guide/blob/main/README.md)
 
 ```cpp
 unsigned long long foo(){
@@ -23,3 +27,8 @@ unsigned long long foo(){
 
 1. Understand arithmetic instructions of Wasm and arm64.
 2. How to encode large immediate number in arm64.
+
+## Extended reading
+
+1. Video search: “Arm64 arithmetic instructions explained”:
+   https://www.youtube.com/results?search_query=arm64+arithmetic+instructions

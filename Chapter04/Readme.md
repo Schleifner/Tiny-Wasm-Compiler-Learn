@@ -1,4 +1,6 @@
-# Introduction
+# Chapter 04: Conditional execution (`if` / `else`)
+
+## Introduction
 
 This chapter will add if-else instruction. Then conditional execution is supported by this compiler.
 
@@ -44,3 +46,11 @@ This chapter will add if-else instruction. Then conditional execution is support
 
 1. Understand if/else instruction of Wasm.
 2. Understand conditional jump instruction in arm64.
+
+## Extended reading
+
+2. Wasm control flow reference (MDN): https://developer.mozilla.org/en-US/docs/WebAssembly/Reference/Control_flow
+3. Compiler design lecture notes on control-flow codegen:
+   https://www.cs.cornell.edu/courses/cs4120/
+4. Video search: “compiler backpatching explained”:
+   https://www.youtube.com/results?search_query=compiler+backpatching+explained

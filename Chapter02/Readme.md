@@ -1,4 +1,6 @@
-# Introduction
+# Chapter 02: Locals and parameter handling
+
+## Introduction
 
 This chapter will add local variable
 
@@ -14,11 +16,28 @@ This chapter will add local variable
 ## Doc
 
 1. [C++ json lib](https://github.com/nlohmann/json.git)
-
 2. [Use gtest in cmake](https://cmake.org/cmake/help/latest/module/FindGTest.html)
+3. [Arm64 instruction reference](https://developer.arm.com/documentation/ddi0596/latest)
 
 ## Learn target
 
 1. Understand the parameters and local variables of Wasm.
 2. Understand local get/set/tee.
 3. ABI between C++ and JIT.
+
+## Tips
+
+If you already can convert `.wast -> .wasm/.json` but feel stuck at `wasm -> Arm64`, try to find the answer to the below questions:
+
+1. What is my true source of codegen truth here: the `.json` test driver, or the Wasm module binary itself?
+2. For one target opcode, what Arm64 instruction intent should it map to, and how can I prove the emitted bytes are correct?
+3. If I pause in debugger (see [Setup gdb debugger](../Chapter00/Readme.md)), what concrete state should I inspect first: stack, locals, registers, or PC flow?
+4. Can I reduce this failure to a single-function minimal case before running full chapter tests again?
+
+## Extended reading
+
+1. WebAssembly spec tests repository: https://github.com/WebAssembly/testsuite
+2. Video search for “Wasm stack machine execution model”:
+   https://www.youtube.com/results?search_query=webassembly+stack+machine+explained
+3. Video search for “Wasm to machine code / JIT internals”:
+   https://www.youtube.com/results?search_query=webassembly+jit+compiler+internals
