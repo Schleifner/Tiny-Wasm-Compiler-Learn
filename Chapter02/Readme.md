@@ -32,7 +32,7 @@ If you already can convert `.wast -> .wasm/.json` but feel stuck at `wasm -> Arm
 1. What is my true source of codegen truth here: the `.json` test driver, or the Wasm module binary itself?
 2. For one target opcode, what Arm64 instruction intent should it map to, and how can I prove the emitted bytes are correct?
 3. If I pause in debugger (see [Setup gdb debugger](../Chapter00/Readme.md)), what concrete state should I inspect first: stack, locals, registers, or PC flow?
-4. Can I reduce this failure to a single-function minimal case before running full chapter tests again?
+4. Before rerunning full chapter tests, can we pause and shrink this to one tiny single-function repro first? At which exact step does it go wrong? What clue does that give us about the bug?
 
 ## Extended reading
 
