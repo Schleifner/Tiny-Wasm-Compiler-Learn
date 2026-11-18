@@ -22,3 +22,7 @@
 
 (assert_return (invoke "abs" (i32.const -1)) (i32.const 1))
 (assert_return (invoke "abs" (i32.const 1)) (i32.const 1))
+(assert_return (invoke "abs" (i32.const 0)) (i32.const 0))
+(assert_return (invoke "abs" (i32.const -123)) (i32.const 123))
+(assert_return (invoke "abs" (i32.const 2147483647)) (i32.const 2147483647))
+(assert_return (invoke "abs" (i32.const -2147483648)) (i32.const -2147483648))

@@ -1,4 +1,6 @@
-# Introduction
+# Chapter 06: Structured branching (`block` / `br` / `br_if`)
+
+## Introduction
 
 Block + br + br_if is any way to implement conditional execution.
 
@@ -38,5 +40,12 @@ This is block version abs, compare this with the if-else version
 
 ## Learn target
 
-1. Understand block/br/br_if of Wasm and arm64.
-2. Think about what's the advantage of br_if compare with if-else?
+1. Understand Wasm `block`, `br`, and `br_if`, and how to translate them into Arm64 branches.
+2. Understand label depth and operand stack behavior when branching out of nested blocks.
+3. Understand how `drop` affects the operand stack.
+4. Compare `br_if` with `if` / `else`: when does an early exit make control flow easier to express?
+
+## Extended reading
+
+1. Video search: [WebAssembly structured control flow and branch labels](https://www.youtube.com/results?search_query=WebAssembly+structured+control+flow+branch+labels).
+2. [A64 -- Base Instructions](https://www.scs.stanford.edu/~zyedidia/arm64/)
